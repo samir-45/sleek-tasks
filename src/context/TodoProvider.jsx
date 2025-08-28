@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react"
+import { createContext, useContext, useEffect, useReducer } from "react"
 
 const initialState = {
     todos: [],
@@ -49,7 +49,17 @@ const todoReducer = (state, action) => {
 const TodoContext = createContext()
 
 export function TodoProvider({ children }) {
-    const [state, dispatch] = useReducer(todoReducer, initialState);
+    // Get data from localstorage
+    const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+    const [state, dispatch] = useReducer(todoReducer, {
+        todos: savedTodos,
+        filter: "all",
+    });
+
+    // Save to localstorage when state.todos value change
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(state.todos));
+    }, [state.todos]);
 
     return (
         <TodoContext.Provider value={{ state, dispatch }}>
