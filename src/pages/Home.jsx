@@ -7,7 +7,7 @@ import TodoList from '../components/TodoList';
 
 const Home = () => {
   return (
-    <div className='p-5'>
+    <div className='w-full'>
       <div className="min-h-screen w-full bg-white relative flex justify-center items-center">
 
         {/* Dual Gradient Overlay (Bottom) Background */}

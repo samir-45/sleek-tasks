@@ -1,2 +1,18 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* html {
+  background-color: white;
+  scrollbar-gutter: stable;
+} */
+
+
+/* Remove DaisyUI modal overlay for the div-based modal */
+.modal.modal-open {
+  background: transparent !important;   /* safety */
+}
+.modal.modal-open::before {
+  background: transparent !important;   /* kill the tint */
+  opacity: 0 !important;                
+}
+
