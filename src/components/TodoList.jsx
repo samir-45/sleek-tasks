@@ -10,7 +10,15 @@ const TodoList = () => {
         if (state.filter === 'active') return !todo.completed;
         if (state.filter === 'completed') return todo.completed;
         return true;
+
     })
+    .filter((todo) => {
+  if (!todo.title) return false;
+  return todo.title.toLowerCase().includes(state.search.toLowerCase());
+});
+    // .filter((todo) =>
+    //     todo.title.toLowerCase().includes(state.search.toLowerCase())
+    // );
 
     if (filteredTodos.length === 0) {
         return <div>No tasks found</div>;

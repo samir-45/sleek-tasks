@@ -8,7 +8,7 @@ const TodoItem = ({ todo }) => {
     const [open, setOpen] = useState(false);
 
     return (
-        <div className="p-3 border rounded flex flex-col gap-1">
+        <div className="p-4 shadow-md rounded-lg flex flex-col gap-1">
             <div className="flex justify-between items-center">
 
                 <div
@@ -23,7 +23,7 @@ const TodoItem = ({ todo }) => {
                     {!todo.completed && (
                         <button
                             onClick={() => setOpen(true)}
-                            className="text-blue-500 font-semibold"
+                            className="cursor-pointer text-sm px-3 py-1 border border-slate-200 rounded-lg"
                         >
                             Edit
                         </button>
@@ -31,9 +31,9 @@ const TodoItem = ({ todo }) => {
 
                     <button
                         onClick={() => dispatch({ type: "DELETE_TODO", payload: todo.id })}
-                        className="text-red-500 font-bold"
+                        className="cursor-pointer text-sm px-3 py-1 border border-red-100 text-red-600 rounded-lg"
                     >
-                        X
+                        Delete
                     </button>
 
                 </div>

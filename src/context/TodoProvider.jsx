@@ -1,10 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react"
 
-const initialState = {
-    todos: [],
-    filter: "all", // "all" | "active" | "completed"
-}
-
 const todoReducer = (state, action) => {
     switch (action.type) {
         case "ADD_TODO":
@@ -36,6 +31,8 @@ const todoReducer = (state, action) => {
                 ...state,
                 filter: action.payload,
             }
+        case "SET_SEARCH":
+            return { ...state, search: action.payload };
         case "CLEAR_COMPLETED":
             return {
                 ...state,
@@ -54,6 +51,7 @@ export function TodoProvider({ children }) {
     const [state, dispatch] = useReducer(todoReducer, {
         todos: savedTodos,
         filter: "all",
+        search: "",
     });
 
     // Save to localstorage when state.todos value change

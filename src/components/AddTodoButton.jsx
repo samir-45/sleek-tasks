@@ -5,13 +5,16 @@ const AddTodoButton = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="my-4">
-      <button
-        className="btn btn-primary w-full"
-        onClick={() => setOpen(true)}
-      >
-        + Add Task
-      </button>
+    <div className="my-4 flex justify-between items-center">
+      <h2 className='text-2xl font-bold'>Tasks</h2>
+      <div>
+        <button
+          className="btn btn-primary"
+          onClick={() => setOpen(true)}
+        >
+          + Add Task
+        </button>
+      </div>
 
       {open && <AddTodo onClose={() => setOpen(false)} />}
     </div>

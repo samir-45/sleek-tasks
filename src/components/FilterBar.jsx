@@ -1,33 +1,38 @@
 import React from 'react';
 import { useTodos } from '../context/TodoProvider';
+import SearchBar from './SearchBar';
 
 const FilterBar = () => {
 
-    const { dispatch } = useTodos();
+  const { state, dispatch } = useTodos();
 
-    return (
-    <div className="flex justify-between my-4">
-      <div className="flex gap-2">
-        <button onClick={() => dispatch({ type: "SET_FILTER", payload: "all" })}>
-          All
-        </button>
-        <button onClick={() => dispatch({ type: "SET_FILTER", payload: "active" })}>
-          Active
-        </button>
+  return (
+    <div className="bg-white px-3 rounded-lg flex justify-between my-4">
+      <div>
+        <SearchBar></SearchBar>
+      </div>
+      <div className='flex gap-2 items-center'>
+        <div>
+          <select
+            value={state.filter} // bind to current filter
+            onChange={(e) => dispatch({ type: "SET_FILTER", payload: e.target.value })}
+            className="select bg-gray-100"
+          >
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
         <button
-          onClick={() => dispatch({ type: "SET_FILTER", payload: "completed" })}
+          onClick={() => dispatch({ type: "CLEAR_COMPLETED" })}
+          className="btn bg-red-400"
         >
-          Completed
+          Clear Completed
         </button>
       </div>
-      <button
-        onClick={() => dispatch({ type: "CLEAR_COMPLETED" })}
-        className="text-red-600"
-      >
-        Clear Completed
-      </button>
+
     </div>
-    );
+  );
 };
 
 export default FilterBar;
