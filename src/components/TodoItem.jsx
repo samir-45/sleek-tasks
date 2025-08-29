@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import { useTodos } from '../context/TodoProvider';
 import EditTodo from './EditTodo';
 import { MdOutlineCheckBox, MdOutlineCheckBoxOutlineBlank } from 'react-icons/md';
+import { format } from 'date-fns';
 
 const TodoItem = ({ todo }) => {
 
     const { dispatch } = useTodos();
     const [open, setOpen] = useState(false);
 
+    function formatDate(dateString) {
+  return format(new Date(dateString), "EEE, dd MMM, yyyy");
+}
+
     return (
-        <div className="p-4 shadow-md rounded-lg w-full flex justify-between gap-4 items-start">
+        <div className="p-4 shadow-md rounded-lg w-full bg-white flex justify-between gap-4 items-start">
 
             <div>
                 {
@@ -56,7 +61,7 @@ const TodoItem = ({ todo }) => {
                 </div>
                 {todo.description && <p className="text-sm text-gray-600">{todo.description}</p>}
                 {todo.date && (
-                    <span className="text-xs text-gray-400">Due: {todo.date}</span>
+                    <span className="text-xs text-gray-400">Date: {formatDate(todo.date)}</span>
                 )}
 
                 {open && <EditTodo todo={todo} onClose={() => setOpen(false)} />}
